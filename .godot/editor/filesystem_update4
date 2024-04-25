@@ -1,0 +1,11 @@
+res://levels/lvl_main.tscn
+res://shaders/subtractive_Pixelshader.gdshader
+res://levels/lvl_world.tscn
+res://systems/Player/obj_Eggy_Player.tscn
+res://systems/World/obj_Tree_Trunk.tscn
+res://systems/World/TreeTrunk/obj_Tree_Trunk.tscn
+res://systems/World/TreeTrunk/sct_Tree_Trunk.gd
+res://shaders/materials/obj_Tree_Trunk.tres
+res://systems/Player/sct_Eggy_Player.gd
+res://systems/Interactions/sct_Destination.gd
+res://systems/Interactions/obj_nest_Platform.tscn

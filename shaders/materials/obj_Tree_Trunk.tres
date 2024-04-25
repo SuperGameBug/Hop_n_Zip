@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cb04qhndlkjrv"]
+
+[ext_resource type="Shader" path="res://shaders/subtractive_Pixelshader.gdshader" id="1_lgl8a"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_lgl8a")
+shader_parameter/scale = 1

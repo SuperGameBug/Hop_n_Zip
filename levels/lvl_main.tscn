@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvx72y1mfi5gk"]
+
+[ext_resource type="Script" path="res://systems/main.gd" id="1_j2os0"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_j2os0")
+
+[node name="btnPlay" type="Button" parent="."]
+offset_left = 664.0
+offset_top = 344.0
+offset_right = 705.0
+offset_bottom = 375.0
+text = "Play"
+
+[node name="btnQuit" type="Button" parent="."]
+offset_left = 664.0
+offset_top = 400.0
+offset_right = 706.0
+offset_bottom = 431.0
+text = "Quit
+"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(683, 384)
+zoom = Vector2(2, 2)
+
+[connection signal="pressed" from="btnPlay" to="." method="_on_btn_play_pressed"]
+[connection signal="pressed" from="btnQuit" to="." method="_on_btn_quit_pressed"]

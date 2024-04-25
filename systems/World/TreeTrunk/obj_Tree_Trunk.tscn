@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dscfi7ete226y"]
+
+[ext_resource type="Script" path="res://systems/World/TreeTrunk/sct_Tree_Trunk.gd" id="1_d60ah"]
+[ext_resource type="Texture2D" uid="uid://cfun2bt4u1e7j" path="res://sprites/world/spr_wood.png" id="2_5h5cv"]
+[ext_resource type="Material" uid="uid://cb04qhndlkjrv" path="res://shaders/materials/obj_Tree_Trunk.tres" id="2_7syde"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_41ra7"]
+size = Vector2(30, 32)
+
+[node name="TreeTrunk" type="Node2D"]
+script = ExtResource("1_d60ah")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_41ra7")
+
+[node name="TrunkSprite" type="Sprite2D" parent="."]
+texture_repeat = 2
+material = ExtResource("2_7syde")
+scale = Vector2(1, 0.5)
+texture = ExtResource("2_5h5cv")
+offset = Vector2(0, -32)
