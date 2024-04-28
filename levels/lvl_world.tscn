@@ -1,59 +1,33 @@
-[gd_scene load_steps=6 format=3 uid="uid://ctwooiu34p2cw"]
+[gd_scene load_steps=5 format=3 uid="uid://ctwooiu34p2cw"]
 
 [ext_resource type="PackedScene" uid="uid://meogtrv5jqk4" path="res://systems/Player/obj_Eggy_Player.tscn" id="1_ah15s"]
-[ext_resource type="PackedScene" uid="uid://8cxahcint400" path="res://systems/Interactions/obj_nest_Platform.tscn" id="2_7wjqv"]
 [ext_resource type="Script" path="res://levels/Label.gd" id="3_qjisq"]
 [ext_resource type="PackedScene" uid="uid://dscfi7ete226y" path="res://systems/World/TreeTrunk/obj_Tree_Trunk.tscn" id="4_p2ywg"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_v7itk"]
 
 [node name="World" type="Node2D"]
+position = Vector2(360, 202.5)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(336, 184)
-zoom = Vector2(2, 2)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(24, 176)
+[node name="PlayGroup" type="CanvasGroup" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, 216)
+[node name="StaticBody2D" type="StaticBody2D" parent="PlayGroup"]
+position = Vector2(0, 202.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayGroup/StaticBody2D"]
 shape = SubResource("WorldBoundaryShape2D_v7itk")
 
-[node name="Eggy_Player" parent="." instance=ExtResource("1_ah15s")]
-position = Vector2(24, 176)
+[node name="Eggy_Player" parent="PlayGroup" instance=ExtResource("1_ah15s")]
+position = Vector2(-336, -2.5)
 
-[node name="Area2D" parent="." instance=ExtResource("2_7wjqv")]
-position = Vector2(24, 272)
-
-[node name="SceneRoot" type="Node2D" parent="."]
-
-[node name="Label" type="Label" parent="." node_paths=PackedStringArray("Player")]
+[node name="Label" type="Label" parent="PlayGroup" node_paths=PackedStringArray("Player")]
 offset_right = 40.0
 offset_bottom = 23.0
+horizontal_alignment = 3
 script = ExtResource("3_qjisq")
 Player = NodePath("../Eggy_Player")
 
-[node name="TreeTrunk" parent="." instance=ExtResource("4_p2ywg")]
-position = Vector2(318, 144)
-
-[node name="TreeTrunk2" parent="." instance=ExtResource("4_p2ywg")]
-position = Vector2(318, 176)
-
-[node name="TreeTrunk3" parent="." instance=ExtResource("4_p2ywg")]
-position = Vector2(318, 208)
-
-[node name="TreeTrunk4" parent="." instance=ExtResource("4_p2ywg")]
-position = Vector2(318, 240)
-
-[node name="TreeTrunk5" parent="." instance=ExtResource("4_p2ywg")]
-position = Vector2(318, 272)
-
-[node name="TreeTrunk6" parent="." instance=ExtResource("4_p2ywg")]
-position = Vector2(318, 304)
-
-[node name="TreeTrunk7" parent="." instance=ExtResource("4_p2ywg")]
-position = Vector2(318, 336)
-
-[node name="TreeTrunk8" parent="." instance=ExtResource("4_p2ywg")]
-position = Vector2(318, 368)
+[node name="TreeTrunk" parent="PlayGroup" instance=ExtResource("4_p2ywg")]
+position = Vector2(328, 189.5)
