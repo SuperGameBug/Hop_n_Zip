@@ -9,4 +9,7 @@ func _ready():
 	_trunkSprite = $TrunkSprite
 	_spriteMaterial = _trunkSprite.get_material()
 	
-	_spriteMaterial.set_shader_parameter("scale", randi_range(0,1))
+	_spriteMaterial.set_shader_parameter("_frame", randi_range(0,1))
+	_spriteMaterial.set_shader_parameter("_spriteLength", 2.)
+	
+	

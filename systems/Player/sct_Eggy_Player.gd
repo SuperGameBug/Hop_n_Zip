@@ -10,14 +10,23 @@ const maximum_jump_force = 2500
 var _init_mouse_position : Vector2
 var _end_mouse_position : Vector2
 var bDebug : bool = false
+var playersprite : Sprite2D
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	playersprite = $Sprite2D
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+func _input(event):
+	pass
+	
 func _physics_process(delta):
+	if(!self.freeze):
+		sprite_anim_Rotate()
+	
 	if Input.is_action_just_pressed("debug_switch"):
 		if bDebug != true:
 			bDebug = true
@@ -25,6 +34,8 @@ func _physics_process(delta):
 			bDebug = false
 		print(bDebug)
 		
+	
+	
 		
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().reload_current_scene()
@@ -68,3 +79,8 @@ func move_to_holder(new_position):
 	rotTween.tween_property(self, "rotation_degrees",0,.1)
 	
 	#rotTween.tween_callback(testFunc())
+	
+func sprite_anim_Rotate():
+		var spriteRotation = int(fposmod(self.rotation + 0.2,2.* PI) * 1.27388535032)
+		playersprite.frame = spriteRotation
+	

@@ -1,14 +1,22 @@
 shader_type canvas_item;
-render_mode world_vertex_coords;
 
-uniform int scale : hint_range(0,1) = 0;
+uniform int _frame = 0;
+uniform float _spriteLength = 1.;
+uniform bool _isAnimSprite = false;
 
 
 
 void fragment() {
 	
 	vec2 new_UV = UV;
-	new_UV.y = (new_UV.y + float(scale)) / 2. ;
+	if(_isAnimSprite == true)
+	{
+		new_UV.x = (new_UV.x + float(_frame))/ _spriteLength;
+	}
+	else
+	{
+		new_UV.y = (new_UV.y + float(_frame)) / _spriteLength ;
+	}
 	vec4 col = texture(TEXTURE,new_UV);
 
 	COLOR = col;
