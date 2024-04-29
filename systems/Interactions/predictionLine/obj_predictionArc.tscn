@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ceiak7q38qdmw"]
+
+[ext_resource type="Script" path="res://systems/Interactions/predictionLine/sct_predictionArc.gd" id="1_7t0yg"]
+
+[node name="ArcPredictor" type="Node2D"]
+script = ExtResource("1_7t0yg")
