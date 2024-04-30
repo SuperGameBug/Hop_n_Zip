@@ -2,36 +2,47 @@
 
 [ext_resource type="PackedScene" uid="uid://meogtrv5jqk4" path="res://systems/Player/obj_Eggy_Player.tscn" id="1_ah15s"]
 [ext_resource type="Script" path="res://levels/Label.gd" id="3_qjisq"]
+[ext_resource type="PackedScene" uid="uid://cquaejpxcqr4q" path="res://systems/World/Spawners/WallSpawner/platform_spawner.tscn" id="4_c10ju"]
 [ext_resource type="PackedScene" uid="uid://8cxahcint400" path="res://systems/Interactions/obj_nest_Platform.tscn" id="4_fo1b1"]
-[ext_resource type="PackedScene" uid="uid://dscfi7ete226y" path="res://systems/World/TreeTrunk/obj_Tree_Trunk.tscn" id="4_p2ywg"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_v7itk"]
 
 [node name="World" type="Node2D"]
-position = Vector2(720, 405)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(320, 180)
+drag_left_margin = 0.5
+drag_top_margin = 0.5
+drag_right_margin = 0.5
+drag_bottom_margin = 0.5
+editor_draw_limits = true
+editor_draw_drag_margin = true
 
 [node name="PlayGroup" type="CanvasGroup" parent="."]
+position = Vector2(320, 180)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="PlayGroup"]
 position = Vector2(0, 202.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayGroup/StaticBody2D"]
+position = Vector2(0, -22.5)
 shape = SubResource("WorldBoundaryShape2D_v7itk")
 
 [node name="Eggy_Player" parent="PlayGroup" instance=ExtResource("1_ah15s")]
-position = Vector2(-336, -2.5)
+position = Vector2(-288, -4)
 
 [node name="Label" type="Label" parent="PlayGroup" node_paths=PackedStringArray("Player")]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = -304.0
+offset_top = -164.0
+offset_right = -264.0
+offset_bottom = -141.0
+size_flags_vertical = 0
 horizontal_alignment = 3
 script = ExtResource("3_qjisq")
 Player = NodePath("../Eggy_Player")
 
-[node name="TreeTrunk" parent="PlayGroup" instance=ExtResource("4_p2ywg")]
-position = Vector2(328, 189.5)
+[node name="PlatformSpawner" parent="PlayGroup" instance=ExtResource("4_c10ju")]
+position = Vector2(296, 180)
 
-[node name="ObjectiveNest" parent="." instance=ExtResource("4_fo1b1")]
-position = Vector2(-336, 99)
+[node name="ObjectiveNest" parent="PlayGroup" instance=ExtResource("4_fo1b1")]
+position = Vector2(-288, 97.5)

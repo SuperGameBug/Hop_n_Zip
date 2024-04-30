@@ -8,7 +8,8 @@
 height = 29.57
 
 [node name="Eggy_Player" type="RigidBody2D"]
-mass = 2.0
+mass = 0.05
+center_of_mass_mode = 1
 script = ExtResource("1_fiwur")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

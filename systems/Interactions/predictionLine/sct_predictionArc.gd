@@ -40,7 +40,7 @@ func _predict_arc(delta):
 		bubbleSprite[i].position.x += ((drag_direction.x * drag_distance) * timeelapsed)
 		bubbleSprite[i].position.y += ((drag_direction.y * drag_distance) * timeelapsed)
 		
-		bubbleSprite[i].position.y += (pow(_gravity * Player.mass * timeelapsed,2.) / 100000.) * timeelapsed
+		bubbleSprite[i].position.y += (pow(_gravity * 2. * timeelapsed,2.) / 100000.) * timeelapsed
 
 		
 

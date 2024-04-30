@@ -6,6 +6,7 @@ signal on_mouse_Drag_end
 
 
 const maximum_jump_force = 1000.
+const devmode : bool = true
 
 
 
@@ -45,7 +46,8 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().reload_current_scene()
 	
-	if (self.freeze == true):
+	#if (self.freeze == true):
+	if (self.freeze == true or devmode == true):	
 		if Input.is_action_just_pressed("touch_primary"):			# Stores initial Mouse position
 			_init_mouse_position = get_global_mouse_position()
 			on_mouse_Drag_start.emit()
@@ -79,7 +81,7 @@ func move_to_holder(new_position):
 	var moveTween = create_tween()
 	var rotTween = create_tween()
 	
-	moveTween.tween_property(self, "position",new_position,.1)
+	moveTween.tween_property(self, "global_position",new_position,.1)
 	rotTween.tween_property(self, "rotation_degrees",0,.1)
 	
 func sprite_anim_Rotate():
