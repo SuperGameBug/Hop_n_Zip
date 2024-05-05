@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8t6lcf0sib7o"]
+
+[ext_resource type="Script" path="res://systems/World/Spawners/WallSpawner/sct_trunk_wall_Manager.gd" id="1_r58vc"]
+
+[node name="Trunk_Manager" type="Node2D"]
+script = ExtResource("1_r58vc")

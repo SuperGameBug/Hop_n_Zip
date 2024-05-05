@@ -4,17 +4,19 @@ class_name predictionArc
 @export var Player : Eggy_Player
 
 var _gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
-var isDragging : bool = false
-var bubbleSprite = []
+var _isDragging : bool = false
+var _bubbleSprite = []
 const _predictor_amount : int = 16
+var _parent_node : Node2D
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	_parent_node = get_node("/root/World/Destroyables")
 	for i in _predictor_amount:
 		var childSprite = Sprite2D.new()
 		childSprite.texture = load("res://sprites/world/spr_Bubble.png")
-		bubbleSprite.append(childSprite)
+		_bubbleSprite.append(childSprite)
 		#childSprite.tree
 		
 	
@@ -24,40 +26,40 @@ func _predict_arc(delta):
 	var drag_direction = (Player._init_mouse_position - current_mouse_location).normalized()
 	var drag_distance = (Player._init_mouse_position - current_mouse_location).length()
 	
-	for i in bubbleSprite.size():
+	for i in _bubbleSprite.size():
 				
 		# Spawining Bubbles
-		if bubbleSprite[i].is_inside_tree() == false:
-			get_tree().root.add_child(bubbleSprite[i])
+		if _bubbleSprite[i].is_inside_tree() == false:
+			_parent_node.add_child(_bubbleSprite[i])
 		
 		var UpVector = Vector2(0.,1.).rotated(Player.rotation)
 			
-		bubbleSprite[i].position = Player.global_position - (16.*UpVector)
+		_bubbleSprite[i].position = Player.global_position - (16.*UpVector)
 		
 
-		var timeelapsed = pow(float(i)/float(bubbleSprite.size()),2.)
+		var timeelapsed = pow(float(i)/float(_bubbleSprite.size()),2.)
 		
-		bubbleSprite[i].position.x += ((drag_direction.x * drag_distance) * timeelapsed)
-		bubbleSprite[i].position.y += ((drag_direction.y * drag_distance) * timeelapsed)
+		_bubbleSprite[i].position.x += ((drag_direction.x * drag_distance) * timeelapsed)
+		_bubbleSprite[i].position.y += ((drag_direction.y * drag_distance) * timeelapsed)
 		
-		bubbleSprite[i].position.y += (pow(_gravity * 2. * timeelapsed,2.) / 100000.) * timeelapsed
+		_bubbleSprite[i].position.y += (pow(_gravity * 2. * timeelapsed,2.) / 100000.) * timeelapsed
 
 		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	if(isDragging == true):
+	if(_isDragging == true):
 		_predict_arc(delta)
 		
 	
 	
 
 func _on_eggy_player_on_mouse_drag_start():
-	isDragging = true
+	_isDragging = true
 
 
 
 func _on_eggy_player_on_mouse_drag_end():
-	isDragging = false
-	for i in bubbleSprite.size():
-		get_tree().root.remove_child(bubbleSprite[i])
+	_isDragging = false
+	for i in _bubbleSprite.size():
+		_parent_node.remove_child(_bubbleSprite[i])

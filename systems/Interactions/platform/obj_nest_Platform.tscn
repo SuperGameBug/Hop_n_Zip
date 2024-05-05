@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://8cxahcint400"]
 
-[ext_resource type="Script" path="res://systems/Interactions/sct_Destination.gd" id="1_dyd45"]
-[ext_resource type="Texture2D" uid="uid://b6ao1g5wmgj1g" path="res://sprites/world/spr_Nest.png" id="1_o20ot"]
+[ext_resource type="Script" path="res://systems/Interactions/platform/sct_Destination.gd" id="1_adg7r"]
+[ext_resource type="Texture2D" uid="uid://b6ao1g5wmgj1g" path="res://sprites/world/spr_Nest.png" id="2_cbhtm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ctiu"]
 size = Vector2(34, 8)
 
 [node name="ObjectiveNest" type="Area2D"]
-script = ExtResource("1_dyd45")
+script = ExtResource("1_adg7r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -12)
@@ -16,7 +16,7 @@ shape = SubResource("RectangleShape2D_4ctiu")
 [node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
 position = Vector2(0, 4)
 scale = Vector2(1.2, 1.2)
-texture = ExtResource("1_o20ot")
+texture = ExtResource("2_cbhtm")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
