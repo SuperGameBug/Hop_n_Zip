@@ -15,22 +15,29 @@ func _ready():
 	var randomEmptyBlock = randi_range(2,_numberOfTrunks - 2)
 	for i in _numberOfTrunks:
 		if randomEmptyBlock != i and (randomEmptyBlock + 1) != i:
-			var trunk = _trunk_wall.instantiate()
-			trunk.position = _initialpoint - Vector2(0., i * 32)
-			add_child(trunk)
+			spawn_trunks(i)
 		elif i == (randomEmptyBlock + 1):
 			pass
 			
 		else:
-			var nest = _nest_platform.instantiate()
-			nest.position = _initialpoint - Vector2(0., i * 32)
-			nest._mySpawner = self
-			add_child(nest)
+			spawn_nest(i)
 	
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _safely_landed():
+func spawn_trunks(i):
+	var trunk = _trunk_wall.instantiate()
+	trunk.position = _initialpoint - Vector2(0., i * 32)
+	add_child(trunk)
+
+func spawn_nest(i):
+	var nest = _nest_platform.instantiate()
+	nest.position = _initialpoint - Vector2(0., i * 32)
+	nest._mySpawner = self
+	add_child(nest)
+
+
+func _safely_landed():		#calls functions that sequences the tweening of tree trunks
 	if(_my_creator):
-		_my_creator._move_to_end()
+		_my_creator._move_squence()
+		print("Creator: Move")
 		#_my_creator._spawn_wall()
