@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6qa4ljdd1odv"]
+
+[ext_resource type="Material" uid="uid://c4ob0ywbbgmpg" path="res://systems/World/WaterBody/mat_water_body.tres" id="1_bncg6"]
+[ext_resource type="Script" path="res://systems/World/WaterBody/sct_water_body.gd" id="2_c2k8c"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_pajts"]
+size = Vector2(640, 64)
+
+[node name="WaterBody" type="Sprite2D"]
+z_index = 1
+material = ExtResource("1_bncg6")
+position = Vector2(320, 0)
+texture = SubResource("PlaceholderTexture2D_pajts")
+offset = Vector2(0, -32)
+script = ExtResource("2_c2k8c")

@@ -26,11 +26,23 @@ func _ready():
 
 
 func _move_squence():
-	if(!_previous_wall):
+	if(_exit_wall == null):
 		_move_to_end()
 	else:
-		_move_to_exit(_exit_wall)
 		_move_to_end()
+		_move_to_exit(_exit_wall)
+		
+	_spawn_wall()
+	
+	
+	
+	
+	#if(!_previous_wall):
+		#_move_to_end()
+	#else:
+		#
+		#_move_to_exit(_exit_wall)
+		#_move_to_end()
 		
 
 
@@ -49,17 +61,12 @@ func _spawn_wall():
 	
 	_parent_node.add_child(_current_wall)
 	
-func _change_currentwall_to_previous():
-	_previous_wall = _current_wall
-	_current_wall = null
+#func _change_currentwall_to_previous():
+	#_previous_wall = _current_wall
+	#_current_wall = null
+	#
+	#_spawn_wall()
 	
-	_spawn_wall()
-	
-func _change_previouswall_to_exit():
-	_exit_wall = _previous_wall
-	_previous_wall = null
-	
-	_spawn_wall()
 
 # following are the Tween Sequences 
 func _move_to_start():
@@ -69,13 +76,13 @@ func _move_to_start():
 	
 func _move_to_end():
 
-	_change_currentwall_to_previous()
-	_tween_to_position(_previous_wall,Vector2(_end_position, _screen_height))
+	#_change_currentwall_to_previous()
+	_tween_to_position(_previous_wall,Vector2(_end_position, _screen_height),_make_me_obsolete, _previous_wall)
 	
 	print("trunkManager: moving to end")
 	
 func _move_to_exit(obj):
-	_change_previouswall_to_exit()	
+	#_change_previouswall_to_exit()	
 	_tween_to_position(_current_wall,Vector2(_exit_position, _screen_height),_destroy_wall, obj)
 	_parent_node.remove_child(obj)
 
@@ -85,6 +92,13 @@ func _destroy_wall(obj):
 	if(obj!=null):
 		#obj.free()
 		print("moving")
+		
+
+func _make_me_previous(obj):
+	_previous_wall = obj
+	
+func _make_me_obsolete(obj):
+	_exit_wall = _previous_wall
 	
 
 # actual tween method

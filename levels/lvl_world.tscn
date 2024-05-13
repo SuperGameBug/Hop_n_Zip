@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ctwooiu34p2cw"]
+[gd_scene load_steps=7 format=3 uid="uid://ctwooiu34p2cw"]
 
 [ext_resource type="PackedScene" uid="uid://meogtrv5jqk4" path="res://systems/Player/obj_Eggy_Player.tscn" id="1_ah15s"]
 [ext_resource type="PackedScene" uid="uid://vlerjjlw6kbr" path="res://systems/World/Killzone/obj_kill_zone.tscn" id="1_lpa5f"]
 [ext_resource type="Script" path="res://levels/Label.gd" id="3_qjisq"]
 [ext_resource type="PackedScene" uid="uid://c8t6lcf0sib7o" path="res://systems/World/Spawners/WallSpawner/obj_trunk_wall_Manager.tscn" id="4_4g4va"]
 [ext_resource type="PackedScene" uid="uid://8cxahcint400" path="res://systems/Interactions/platform/obj_nest_Platform.tscn" id="4_fo1b1"]
+[ext_resource type="PackedScene" uid="uid://c6qa4ljdd1odv" path="res://systems/World/WaterBody/water_body.tscn" id="5_msqa2"]
 
 [node name="World" type="Node2D"]
 
@@ -19,6 +20,9 @@ editor_draw_drag_margin = true
 
 [node name="PlayGroup" type="CanvasGroup" parent="."]
 position = Vector2(320, 180)
+
+[node name="WaterBody" parent="PlayGroup" instance=ExtResource("5_msqa2")]
+position = Vector2(0, 148)
 
 [node name="KillZone" parent="PlayGroup" instance=ExtResource("1_lpa5f")]
 position = Vector2(0, 268)

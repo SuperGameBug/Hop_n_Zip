@@ -38,6 +38,7 @@ func spawn_nest(i):
 
 func _safely_landed():		#calls functions that sequences the tweening of tree trunks
 	if(_my_creator):
+		_my_creator._make_me_previous(self)
 		_my_creator._move_squence()
 		print("Creator: Move")
 		#_my_creator._spawn_wall()

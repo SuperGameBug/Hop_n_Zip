@@ -5,4 +5,6 @@
 [resource]
 resource_local_to_scene = true
 shader = ExtResource("1_lgl8a")
-shader_parameter/scale = 1
+shader_parameter/_frame = 0
+shader_parameter/_spriteLength = 1.0
+shader_parameter/_isAnimSprite = false
