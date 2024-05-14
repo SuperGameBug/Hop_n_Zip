@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://c6qa4ljdd1odv"]
+[gd_scene load_steps=5 format=3 uid="uid://c6qa4ljdd1odv"]
 
 [ext_resource type="Material" uid="uid://c4ob0ywbbgmpg" path="res://systems/World/WaterBody/mat_water_body.tres" id="1_bncg6"]
 [ext_resource type="Script" path="res://systems/World/WaterBody/sct_water_body.gd" id="2_c2k8c"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_pajts"]
 size = Vector2(640, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pb7dv"]
+size = Vector2(640, 66)
 
 [node name="WaterBody" type="Sprite2D"]
 z_index = 1
@@ -13,3 +16,13 @@ position = Vector2(320, 0)
 texture = SubResource("PlaceholderTexture2D_pajts")
 offset = Vector2(0, -32)
 script = ExtResource("2_c2k8c")
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -23)
+shape = SubResource("RectangleShape2D_pb7dv")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

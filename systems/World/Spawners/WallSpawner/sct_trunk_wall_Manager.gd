@@ -108,5 +108,5 @@ func _tween_to_position(obj, goal_position, callback = null, value = null):
 		move_tween.tween_property(obj,"global_position",goal_position,1.2).set_trans(Tween.TRANS_CUBIC).set_delay(.15)
 		
 		if(callback != null):
-			move_tween.tween_callback(callback.bind(value))
+			move_tween.tween_callback(callback.bind(value)).set_delay(1.2)
 	
