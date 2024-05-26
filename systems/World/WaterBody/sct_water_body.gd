@@ -11,14 +11,8 @@ var _make_ripple : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	_make_ripple = false
-	self.global_position = Vector2(_body_size / 2.,_screen_bottom)
-	_watermaterial = self.material
-	_watermaterial.set_shader_parameter("_waterWidth", _body_size)
-	
-	print(_body_size/4.)
-	
-	#pass
+	_initialise()
+
 	
 func _process(delta):
 	if(_make_ripple == true):
@@ -67,6 +61,18 @@ func tween_ripple(goal, length, callback = null):
 	ripple_tween.tween_property(self, "_ripple_intensity", goal,length)
 	if(callback):
 		ripple_tween.tween_callback(callback)
+		
+		
+func _initialise():
+	#_make_ripple = false
+	self.global_position = Vector2(_body_size / 2.,_screen_bottom)
+	_watermaterial = self.material
+	_watermaterial.set_shader_parameter("_waterWidth", _body_size)
+	
+	_end_ripple()
+	
+	
+	print(_body_size/4.)
 	
 
 

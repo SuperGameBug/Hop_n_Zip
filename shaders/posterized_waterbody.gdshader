@@ -6,16 +6,19 @@ uniform float _ripple_intensity = 0.;
 uniform bool _startDrop = false;
 
 group_uniforms Colours;
-uniform vec3 _baseColour : source_color;
+uniform vec3 _topColour : source_color;
 uniform vec3 _bottomColour : source_color;
 uniform float _waterBlending : hint_range(0.0, 10.0, 0.01);
+uniform float _waterHighlight : hint_range(0.0, 1.0, .01) = 1.;
 
 group_uniforms Waves;
 uniform vec2 _water_waves_frequency = vec2(0.1,0.05);
 uniform vec2 _water_waves_height = vec2(1.,5.);
 uniform vec2 _water_waves_speed = vec2(1.,2.);
 uniform float _waterDepth = 0.;
+uniform float _irregularity : hint_range(-2.00, 2.0, .01) = 1.;
 
+#define _motionStutter .1
 
 uniform float _dropPosition : hint_range(0.0, 1.0, 0.010);
 
@@ -27,7 +30,8 @@ uniform float _pixel_size = 0.1;
 
 
 void fragment() {
-	float posterizedTime = fPosterize(TIME,0.1);
+	float posterizedTime = fPosterize(TIME,_motionStutter);
+	//float posterizedTime = TIME;	
 	vec2 _uv = UV;
 	_uv.x = fPosterize(_uv.x,_pixel_size);
 	_uv.y = fPosterize(_uv.y,_pixel_size);
@@ -52,20 +56,22 @@ void fragment() {
 	
 
 	float topClip = _uv.y;
-	topClip += (((sin((_uv.x * _water_waves_frequency.x - (_uv.y / 5.)) + (posterizedTime * _water_waves_speed.x))*_water_waves_height.x) +
+	topClip += (((sin((_uv.x * _water_waves_frequency.x - (_uv.y * _irregularity)) + (posterizedTime * _water_waves_speed.x))*_water_waves_height.x) +
 				(sin((_uv.x * _water_waves_frequency.y) + (posterizedTime * _water_waves_speed.y))*_water_waves_height.y)) - 4.);
 				
 	topClip += (ripple);
-
-
-	vec3 waterColour = mix(_baseColour,_bottomColour,vec3(fSaturate((topClip) / _waterBlending)));
-	//vec3 waterColour = vec3((fSaturate(topClip) - fSaturate(ripple)) / _waterBlending);
+	//topClip = fSaturate(fPosterize(topClip,_pixel_size));
+	//topClip = step(_waterHighlight,(topClip));
 	
-	COLOR.xyz =  waterColour / topClip;
-	//COLOR.a = round(smoothstep(_waterDepth,0.,topClip)) / round(topClip);
-	//COLOR.a = round(topClip - (ripple));
-	COLOR.a = round(topClip);
+	float blendedWater = step(_waterHighlight,(topClip) / (_waterBlending));
 
-	//COLOR.xyz = vec3();
+
+	vec3 waterColour = mix(_topColour,_bottomColour,vec3(fSaturate(blendedWater*topClip)));
+
+	
+	COLOR.xyz =  ((waterColour) / fPosterize((topClip),2.));
+
+	COLOR.a = smoothstep(_waterDepth,1.,topClip) * topClip;
+	COLOR.a = round(COLOR.a);
 	
 }
